@@ -8,6 +8,10 @@
                         Edit Data Kota
                    </div>
                 <div class="card-body">
+                <div class="form-group">
+                    <label for="">Provinsi</label>
+                    <input type="text" class="form-control" name="id_provinsi" value="{{$kota->provinsi->nama_provinsi}}">
+                    </div>
                  <div class="form-group">
                     <label for="">Kode Kota</label>
                     <input type="text" name="kode_kota" value="{{$kota->kode_kota}}" class="form-control" readonly>

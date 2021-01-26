@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\KotaController;
+use App\Http\Controllers\KecamatanController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +47,5 @@ Route::get('provinsi',function()
 
 Route::resource('provinsi',ProvinsiController::class); 
 Route::resource('kota',KotaController::class);
+Route::resource('kecamatan',KecamatanController::class);
 });
