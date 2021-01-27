@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rw;
+use App\Models\rw;
+use App\Models\desa;
 use Illuminate\Http\Request;
 
 class RwController extends Controller
@@ -14,7 +15,8 @@ class RwController extends Controller
      */
     public function index()
     {
-        //
+        $rw = rw::with('desa')->get();
+        return view('admin.rw.index', compact('rw'));
     }
 
     /**
@@ -24,7 +26,8 @@ class RwController extends Controller
      */
     public function create()
     {
-        //
+        $rw = Desa::all();
+        return view('admin.rw.create', compact('rw'));
     }
 
     /**
@@ -35,51 +38,70 @@ class RwController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rw = new Rw();
+        $rw->id_desa = $request->id_desa;
+        $rw->nama_rw = $request->nama_rw;
+        $rw->save();
+        return redirect()->route('rw.index')
+            ->with(['success'=>'Data <b>', $rw->nama_rw, 
+            '</b> Berhasil di input']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Rw  $rw
+     * @param  \App\Models\rw  $rw
      * @return \Illuminate\Http\Response
      */
-    public function show(Rw $rw)
+    public function show($id)
     {
-        //
+        $rw = Rw::findOrFail($id);
+        return view('admin.rw.show', compact('rw'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Rw  $rw
+     * @param  \App\Models\rw  $rw
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rw $rw)
+    public function edit($id)
     {
-        //
+        $desa = Desa::all();
+        $rw = rw::findOrFail($id);
+        return view('admin.rw.edit', compact('rw', 'desa'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Rw  $rw
+     * @param  \App\Models\rw  $rw
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rw $rw)
+    public function update(Request $request, $id)
     {
-        //
+        $rw = Rw::findOrFail($id);
+        $rw->id_desa = $request->id_desa;
+        $rw->nama_rw = $request->nama_rw;
+        $rw->save();
+        return redirect()->route('rw.index')
+            ->with(['success'=>'Data <b>', $rw->nama_rw, 
+            '</b> Berhasil di edit']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Rw  $rw
+     * @param  \App\Models\rw  $rw
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rw $rw)
+    public function destroy($id)
     {
-        //
+        $rw = Rw::findOrFail($id);
+        $rw->delete();
+        return redirect()->route('rw.index')
+            ->with(['success'=>'Data <b>', $rw->nama_rw, 
+            '</b> Berhasil di hapus']);
     }
 }

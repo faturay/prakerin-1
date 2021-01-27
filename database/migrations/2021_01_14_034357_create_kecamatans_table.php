@@ -15,9 +15,9 @@ class CreateKecamatansTable extends Migration
     {
         Schema::create('kecamatans', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('id_kota');
-            $table->foreign('id_kota')->references('id')->on('kotas')->onDelete('cascade');
-            $table->integer('kode_kecamatan');
+            $table->unsIgnedInteger('id_kota');
+            $table->foreign('id_kota')->references('id')
+            ->on('kotas')->onDelete('cascade');
             $table->string('nama_kecamatan');
             $table->timestamps();
         });

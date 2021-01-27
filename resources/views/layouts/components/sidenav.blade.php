@@ -36,21 +36,21 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="examples/tables.html">
+            <a class="nav-link" href="{{route('desa.index')}}">
                 <i class="ni ni-bullet-list-67 text-default"></i>
                 <span class="nav-link-text">Desa</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="examples/login.html">
+            <a class="nav-link" href="{{route('rw.index')}}">
                 <i class="ni ni-key-25 text-info"></i>
                 <span class="nav-link-text">Rw</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="examples/register.html">
+            <a class="nav-link" href="{{route('kasus.index')}}">
                 <i class="ni ni-circle-08 text-pink"></i>
-                <span class="nav-link-text">Register</span>
+                <span class="nav-link-text">Kasus</span>
               </a>
             </li>
             <li class="nav-item">

@@ -15,9 +15,10 @@ class CreateDesasTable extends Migration
     {
         Schema::create('desas', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('id_kecamatan');
-            $table->foreign('id_kecamatan')->references('id')->on('kecamatans')->onDelete('cascade');
-            $table->string('nama');
+            $table->unsIgnedInteger('id_kecamatan');
+            $table->foreign('id_kecamatan')->references('id')
+            ->on('kecamatans')->onDelete('cascade');
+            $table->string('nama_desa');
             $table->timestamps();
         });
     }
