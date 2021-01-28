@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Kasus;
-use App\Models\Rw;
+use App\Controller\DB;
+use App\Models\kasus;
+use App\Models\rw;
 use Illuminate\Http\Request;
 
 class KasusController extends Controller
@@ -15,7 +15,7 @@ class KasusController extends Controller
      */
     public function index()
     {
-        $kasus = Kasus::with('rw')->get();
+        $kasus = kasus::with('rw')->get();
         return view('admin.kasus.index', compact('kasus'));
     }
 
@@ -26,9 +26,8 @@ class KasusController extends Controller
      */
     public function create()
     {
-        $rw = Rw::all();
-        return view('admin.kasus.create', compact('rw'));
-
+        $kasus = Rw::all();
+        return view('admin.kasus.create', compact('kasus'));
     }
 
     /**
@@ -39,73 +38,75 @@ class KasusController extends Controller
      */
     public function store(Request $request)
     {
-        $kasus = new Kasus();
+         $kasus = new kasus();
         $kasus->id_rw = $request->id_rw;
-        $kasus->jumlah_positif = $request->positif;
-        $kasus->jumlah_sembuh = $request->sembuh;
-        $kasus->jumlah_meninggal = $request->meninggal;
-        $kasus->tanggal = $request->tgl;
+        $kasus->reaktif = $request->reaktif;
+        $kasus->positif = $request->positif;
+        $kasus->sembuh = $request->sembuh;
+        $kasus->meninggal = $request->meninggal;
+        $kasus->tanggal = $request->tanggal;
         $kasus->save();
-        return redirect()->route('kasus.index');
-        }
+        return redirect()->route('kasus.index')
+            ->with(['success'=>'Data Berhasil di input']);
+    }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Kasus  $kasus
+     * @param  \App\Models\kasus  $kasus
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $kasus = Kasus::findOrFail($id);
+        $kasus = kasus::findOrFail($id);
         return view('admin.kasus.show', compact('kasus'));
-
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Kasus  $kasus
+     * @param  \App\Models\kasus  $kasus
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $rw = Rw::all();
-        $kasus = Kasus::findOrFail($id);
+        $kasus = kasus::findOrFail($id);
         return view('admin.kasus.edit', compact('kasus', 'rw'));
-
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Kasus  $kasus
+     * @param  \App\Models\kasus  $kasus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        $kasus = Kasus::findOrFail($id);
+        $kasus = new kasus();
         $kasus->id_rw = $request->id_rw;
-        $kasus->jumlah_positif = $request->positif;
-        $kasus->jumlah_sembuh = $request->sembuh;
-        $kasus->jumlah_meninggal = $request->meninggal;
-        $kasus->tanggal = $request->tgl;
+        $kasus->reaktif = $request->reaktif;
+        $kasus->positif = $request->positif;
+        $kasus->sembuh = $request->sembuh;
+        $kasus->meninggal = $request->meninggal;
+        $kasus->tanggal = $request->tanggal;
         $kasus->save();
-        return redirect()->route('kasus.index');
-
+        return redirect()->route('kasus.index')
+            ->with(['success'=>'Data Berhasil di input']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Kasus  $kasus
+     * @param  \App\Models\kasus  $kasus
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $kasus = Kasus::findOrFail($id);
+        $kasus = kasus::findOrFail($id);
         $kasus->delete();
-        return redirect()->route('kasus.index');
+        return redirect()->route('kasus.index')
+            ->with(['success'=>'Data Berhasil di hapus']);
     }
 }

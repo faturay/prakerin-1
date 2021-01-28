@@ -5,33 +5,47 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Show Data Kasus
+                        Edit Data Kasus
                     </div>
                     <div class="card-body">
+                        <form action="{{route('kasus.update', $kasus->id)}}" method="post">
+                            @method('put')
                             @csrf
                             <div class="form-group">
-                                <label for="">rw</label>
-                                <input type="text" name="id_rw" value="{{$kasus->rw->rw}}" class="form-control" readonly>
+                                <label for="">Pilih Rw</label>
+                                <select name="id_rw" class="form-control">
+                                    @foreach($rw as $data)
+                                    <option value="{{$data->id}}" {{$data->id == $kasus->id_rw ? 'selected' : ''}}>
+                                            {{$data->nama_rw}}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="">jumlah positif</label>
-                                <input type="integer" name="positif" value="{{$kasus->jumlah_positif}}" class="form-control" required>
+                                <label for="">Reaktif</label>
+                                <input type="number" name="reaktif" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="">jumlah sembuh</label>
-                                <input type="integer" name="sembuh" value="{{$kasus->jumlah_sembuh}}" class="form-control" required>
+                                <label for="">Positif</label>
+                                <input type="number" name="positif" value="{{$kasus->nama_rw}}" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="">jumlah meninggal</label>
-                                <input type="integer" name="meninggal" value="{{$kasus->jumlah_meninggal}}" class="form-control" required>
+                                <label for="">Sembuh</label>
+                                <input type="number" name="sembuh" value="{{$kasus->nama_rw}}" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="">tanggal</label>
-                                <input type="date" name="tgl" value="{{$kasus->tanggal}}" class="form-control" required>
+                                <label for="">Meninggal</label>
+                                <input type="number" name="meninggal" value="{{$kasus->nama_rw}}" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <a href=" {{ route('rw.index') }} " class="btn btn-danger">Back</a>
+                                <label for="">Tanggal</label>
+                                <input type="number" name="tanggal" value="{{$kasus->nama_rw}}" class="form-control" readonly>
                             </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn block">Simpan</button>
+                                <a href=" {{ route('kasus.index') }} " class="btn btn-danger">Back</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -38,6 +38,14 @@ class DesaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_desa' => 'required|unique:desas',
+        ],
+        [
+            'nama_desa.required' => "nama desa harus di isi",
+            'nama_desa.unique' => "nama sudah di pakai",
+        ]);
+
         $desa = new Desa();
         $desa->id_kecamatan = $request->id_kecamatan;
         $desa->nama_desa = $request->nama_desa;

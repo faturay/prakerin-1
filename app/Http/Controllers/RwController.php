@@ -38,12 +38,20 @@ class RwController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+        'no_rw' => 'required|unique:rws',
+    ],
+    [
+        'no_rw.required' => "nomer rw harus di isi",
+        'no_rw.unique' => "nama sudah di pakai",
+    ]);
+
         $rw = new Rw();
         $rw->id_desa = $request->id_desa;
-        $rw->nama_rw = $request->nama_rw;
+        $rw->no_rw = $request->no_rw;
         $rw->save();
         return redirect()->route('rw.index')
-            ->with(['success'=>'Data <b>', $rw->nama_rw, 
+            ->with(['success'=>'Data <b>', $rw->no_rw, 
             '</b> Berhasil di input']);
     }
 
@@ -83,7 +91,7 @@ class RwController extends Controller
     {
         $rw = Rw::findOrFail($id);
         $rw->id_desa = $request->id_desa;
-        $rw->nama_rw = $request->nama_rw;
+        $rw->no_rw = $request->no_rw;
         $rw->save();
         return redirect()->route('rw.index')
             ->with(['success'=>'Data <b>', $rw->nama_rw, 
@@ -101,7 +109,7 @@ class RwController extends Controller
         $rw = Rw::findOrFail($id);
         $rw->delete();
         return redirect()->route('rw.index')
-            ->with(['success'=>'Data <b>', $rw->nama_rw, 
+            ->with(['success'=>'Data <b>', $rw->no_rw, 
             '</b> Berhasil di hapus']);
     }
 }

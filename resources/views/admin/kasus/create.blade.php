@@ -11,32 +11,36 @@
                         <form action="{{route('kasus.store')}}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="">Rw</label>
+                                <label for="">Pilih Rw</label>
                                 <select name="id_rw" class="form-control">
-                                    @foreach($rw as $data)
-                                    <option value="{{$data->id}}">{{$data->rw}}</option>
+                                    @foreach($kasus as $data)
+                                    <option value="{{$data->id}}">{{$data->no_rw}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="">jumlah positif</label>
-                                <input type="integer" name="positif" class="form-control" required>
+                                <label for="">Reaktif</label>
+                                <input type="number" name="reaktif" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="">jumlah sembuh</label>
-                                <input type="integer" name="sembuh" class="form-control" required>
+                                <label for="">Positif</label>
+                                <input type="number" name="positif" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="">jumlah meninggal</label>
-                                <input type="integer" name="meninggal" class="form-control" required>
+                                <label for="">Sembuh</label>
+                                <input type="number" name="sembuh" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="">tanggal</label>
-                                <input type="date" name="tgl" class="form-control" required>
+                                <label for="">Meninggal</label>
+                                <input type="number" name="meninggal" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tanggal</label>
+                                <input type="date" name="" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn block">Simpan</button>
-                                <a href=" {{ route('rw.index') }} " class="btn btn-danger">Back</a>
+                                <a href=" {{ route('kasus.index') }} " class="btn btn-danger">Back</a>
                             </div>
                         </form>
                     </div>

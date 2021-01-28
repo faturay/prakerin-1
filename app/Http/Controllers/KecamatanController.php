@@ -38,6 +38,14 @@ class KecamatanController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_kecamatan' => 'required|unique:kecamatans',
+        ],
+        [
+            'nama_kecamatan.required' => "nama kecamatan harus di isi",
+            'nama_kecamatan.unique' => "nama sudah di pakai",
+        ]);
+
         $kecamatan = new Kecamatan();
         $kecamatan->id_kota = $request->id_kota;
         $kecamatan->nama_kecamatan = $request->nama_kecamatan;

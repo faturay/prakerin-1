@@ -12,24 +12,26 @@
                     <div class="table-responsive">
                         <table class="table">
                             <tr>
-                                <th>No</th>
-                                <th>rw</th>
-                                <th>jumlah positif</th>
-                                <th>jumlah sembuh</th>
-                                <th>jumlah meninggal</th>
-                                <th>tanggal</th>
-                                <th>Aksi</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Rw</th>
+                                <th scope="col">Reaktif</th>
+                                <th scope="col">Positif</th>
+                                <th scope="col">Sembuh</th>
+                                <th scope="col">Meninggal</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Aksi</th>
                             </tr>
                             @php $no=1; @endphp
                             @foreach($kasus as $data)
                             <tr>
                                 <td>{{$no++}}</td>
-                                <td>{{$data->rw->rw}}</td>
-                                <td>{{$data->jumlah_positif}}</td>
-                                <td>{{$data->jumlah_sembuh}}</td>
-                                <td>{{$data->jumlah_meninggal}}</td>
-                                <td>{{$data->jumlah_tanggal}}</td>
-
+                                <td>{{$data->rw->nama_rw}}</td>
+                                <td>{{$data->kasus->reaktif}}</td>
+                                <td>{{$data->kasus->positif}}</td>
+                                <td>{{$data->kasus->sembuh}}</td>
+                                <td>{{$data->kasus->meninggal}}</td>
+                                <td>{{$data->kasus->tanggal}}</td>
+                                <td>{{$data->kasus->Aksi}}</td>
                                 <td>
                                     <form action="{{route('kasus.destroy', $data->id)}}" method="post">
                                         @csrf
@@ -37,6 +39,7 @@
                                         <a class="btn btn-info" href=" {{ route('kasus.show', $data->id) }} ">Show</a>
                                         <a class="btn btn-warning" href=" {{ route('kasus.edit', $data->id) }} ">Edit</a>
                                         <button type="submit" class="btn btn-danger" >Delete</button>
+                                        <a href=" {{ route('kasus.index') }} " class="btn btn-danger">Back</a>
                                     </form>
                                 </td>
                             </tr>

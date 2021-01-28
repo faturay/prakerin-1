@@ -19,8 +19,11 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="">No Urut Rw</label>
-                                <input type="integer" name="nama_rw" class="form-control" required>
+                                <label for="">No Rw</label>
+                                <input type="integer" name="no_rw" class="form-control" required>
+                                @if ($errors->has('no_rw'))
+                    <span class="text-danger">{{$errors->first('no_rw')}}</span>
+                    @endif
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn block">Simpan</button>
