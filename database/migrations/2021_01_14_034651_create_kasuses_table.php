@@ -15,10 +15,8 @@ class CreateKasusesTable extends Migration
     {
         Schema::create('kasuses', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsIgnedInteger('id_rw');
-            $table->foreign('id_rw')->references('id')
-            ->on('rws')->onDelete('cascade');
-            $table->integer('reaktif');
+            $table->unsignedInteger('id_rw');
+            $table->foreign('id_rw')->references('id')->on('rws')->onDelete('cascade');
             $table->integer('positif');
             $table->integer('sembuh');
             $table->integer('meninggal');

@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Controller\DB;
-use App\Models\kasus;
-use App\Models\rw;
+
+use App\Models\Kasus;
+use App\Models\Rw;
 use Illuminate\Http\Request;
 
 class KasusController extends Controller
@@ -15,8 +15,8 @@ class KasusController extends Controller
      */
     public function index()
     {
-        $kasus = kasus::with('rw')->get();
-        return view('admin.kasus.index', compact('kasus'));
+        $kasus = Kasus::with('rw.desa.kecamatan.kota.provinsi')->get();
+        return view('admin.kasus.index',compact('kasus'));
     }
 
     /**
@@ -26,8 +26,8 @@ class KasusController extends Controller
      */
     public function create()
     {
-        $kasus = Rw::all();
-        return view('admin.kasus.create', compact('kasus'));
+        $rw = Rw::all();
+        return view('admin.kasus.create', compact('rw'));
     }
 
     /**
@@ -38,75 +38,72 @@ class KasusController extends Controller
      */
     public function store(Request $request)
     {
-         $kasus = new kasus();
-        $kasus->id_rw = $request->id_rw;
-        $kasus->reaktif = $request->reaktif;
+        $kasus = new Kasus;
         $kasus->positif = $request->positif;
         $kasus->sembuh = $request->sembuh;
         $kasus->meninggal = $request->meninggal;
         $kasus->tanggal = $request->tanggal;
-        $kasus->save();
-        return redirect()->route('kasus.index')
-            ->with(['success'=>'Data Berhasil di input']);
+        $kasus->id_rw = $request->id_rw;
+        $kasus ->save();
+        return redirect()->route('kasus.index')->with('sukses','Data Berhasil Di Tambah');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\kasus  $kasus
+     * @param  \App\Models\Kasus  $kasus
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $kasus = kasus::findOrFail($id);
-        return view('admin.kasus.show', compact('kasus'));
+        $kasus = Kasus::findOrFail($id);
+        $rw = Rw::all();
+        return view('admin.kasus.show',compact('kasus','rw'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\kasus  $kasus
+     * @param  \App\Models\Kasus  $kasus
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
+        $kasus = Kasus::findOrFail($id);
         $rw = Rw::all();
-        $kasus = kasus::findOrFail($id);
-        return view('admin.kasus.edit', compact('kasus', 'rw'));
+        $selected = $kasus->rw->pluck('id')->toArray();
+        return view('admin.kasus.edit',compact('kasus','rw','selected'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\kasus  $kasus
+     * @param  \App\Models\Kasus  $kasus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        $kasus = new kasus();
-        $kasus->id_rw = $request->id_rw;
-        $kasus->reaktif = $request->reaktif;
+        $kasus = Kasus::findOrFail($id);
         $kasus->positif = $request->positif;
         $kasus->sembuh = $request->sembuh;
         $kasus->meninggal = $request->meninggal;
         $kasus->tanggal = $request->tanggal;
-        $kasus->save();
-        return redirect()->route('kasus.index')
-            ->with(['success'=>'Data Berhasil di input']);
+        $kasus->id_rw = $request->id_rw;
+        $kasus ->save();
+        return redirect()->route('kasus.index')->with('sukses','Data Berhasil Di Update');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\kasus  $kasus
+     * @param  \App\Models\Kasus  $kasus
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $kasus = kasus::findOrFail($id);
+        $kasus = Kasus::findOrFail($id);
         $kasus->delete();
-        return redirect()->route('kasus.index')
-            ->with(['success'=>'Data Berhasil di hapus']);
+        return redirect()->route('kasus.index');
     }
 }
