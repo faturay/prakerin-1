@@ -10,7 +10,7 @@
                 @csrf
                 @method('PUT')
                 @livewireScripts
-                @livewire('livewire',['selectedRw' => $kasus->id_rw,'id' => $kasus->id])
+                @livewire('livewire',['selectedRw' => $kasus->id_rw,'idk' => $kasus->id])
                 @livewireStyles
                 <div class="form-group">
                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header"><br>
-                    Daftar Kasus
+                    Data Kasus
                 <a href="{{route('kasus.create')}}" class="btn btn-primary float-right">
                 Tambah Data</a>
                 </div>
@@ -41,7 +41,7 @@
                                             Kota : {{$data->rw->desa->kecamatan->kota->nama_kota}}<br>
                                             Kecamatan : {{$data->rw->desa->kecamatan->nama_kecamatan}}<br>
                                             Desa : {{$data->rw->desa->nama_desa}}</td>
-                                            <td>{{$data->rw->nama_rw}}</td>
+                                            <td>{{$data->rw->no_rw}}</td>
                                             <td>{{$data->positif}}</td>
                                             <td>{{$data->sembuh}}</td>
                                             <td>{{$data->meninggal}}</td>
@@ -50,8 +50,8 @@
                                             <form action="{{route('kasus.destroy',$data->id)}}"  method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <a class="btn btn-info btn-sm btn-rounded " href="{{route('kasus.edit',$data->id)}}"> <i class="fa fa-edit"></i></a>
-                                            <a class="btn btn-warning btn-sm btn-rounded " href="{{route('kasus.show',$data->id)}}"> <i class="fa fa-eye"></i></a>
+                                            <a class="btn btn-info" href=" {{ route('kasus.show', $data->id) }} ">Show</a>
+                                            <a class="btn btn-warning" href=" {{ route('kasus.edit', $data->id) }} ">Edit</a>
                                             <button type="submit" onclick="return confirm('Apakah anda yakin?');" class="btn btn-danger btn-sm btn-rounded"><i class="fa fa-trash"></i></button>
                                             </form>
                                             </td>

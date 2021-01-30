@@ -32,8 +32,8 @@
                            <form action="{{route('kota.destroy',$data->id)}}" method="post">
                            @method('delete')
                            @csrf
-                           <a href="{{route('kota.show',$data->id)}}" class="btn btn-success">Show</a>
-                           <a href="{{route('kota.edit',$data->id)}}" class="btn btn-warning">Edit</a>
+                           <a class="btn btn-info" href=" {{ route('kota.show', $data->id) }} ">Show</a>
+                           <a class="btn btn-warning" href=" {{ route('kota.edit', $data->id) }} ">Edit</a>
                            <button type="submit" class="btn btn-danger">Delete</button>
                            </form>
                            </td>
