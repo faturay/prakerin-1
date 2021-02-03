@@ -1,12 +1,11 @@
 <?php
 
+use App\Models\provinsi;
+use App\Models\kasus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ApiController;
-use App\Http\Controllers\PostsController;
-use App\Http\Controllers\ProvinsiController;
-
-
+use App\Http\Controllers\Api\ProvinsiController;
+use App\Http\Controllers\Api\ApiController;
 
 
 /*
@@ -23,17 +22,14 @@ use App\Http\Controllers\ProvinsiController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('provinsi', [ApiController::class,'provinsi']);
-Route::get('provinsi/(id)', [ApiController::class,'provinsixkota']);
 
-//Api
-Route::get('provinsi', [ProvinsiController::class, 'index']);
-Route::post('provinsi', [ProvinsiController::class, 'store']);
-Route::get('provinsi/{id}', [ProvinsiController::class, 'show']);
-Route::post('provinsi/update/{id}', [ProvinsiController::class, 'update']);
+//ROUTE ProvinsiController
+// Route::get('provinsi',[ProvinsiController::class, 'index']);
+// Route::post('provinsi',[ProvinsiController::class, 'store']);
+// Route::get('provinsi/{id?}',[ProvinsiController::class, 'show']);
+// Route::delete('provinsi/{id?}',[ProvinsiController::class, 'destroy']);
 
-Route::get('/posts',[PostsController::class,'index']);
-Route::post('/posts',[PostsController::class,'store']);
-Route::get('/posts/{id}',[PostsController::class,'show']);
-Route::put('/posts/update/{id}', [PostsController::class,'update']);
-Route::delete('/posts/{id}', [PostsController::class,'destroy']);
+
+//ROUTE ApiController
+Route::get('indo',[ApiController::class, 'index']);
+Route::get('provinsi/{id?}',[ApiController::class, 'provinsi']);
